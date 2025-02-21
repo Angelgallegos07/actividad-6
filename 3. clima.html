@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima Estimado</title>
+    <link rel="stylesheet" href="clima.css">
+</head>
+<body>
+    <h1>Consulta el Clima Estimado</h1>
+    <select id="city">
+        <option value="Hermosillo">Hermosillo</option>
+        <option value="Ciudad de Mexico">Ciudad de México</option>
+        <option value="Guadalajara">Guadalajara</option>
+        <option value="Monterrey">Monterrey</option>
+        <option value="Cancun">Cancún</option>
+    </select>
+    <button id="search">Buscar</button>
+    <div id="weather-result"></div>
+
+    <script>
+        document.getElementById("search").addEventListener("click", () => {
+            const city = document.getElementById("city").value;
+            getEstimatedWeather(city);
+        });
+
+        function getEstimatedWeather(city) {
+            const estimatedWeather = {
+                "Hermosillo": { temp: "30°C", condition: "Soleado" },
+                "Ciudad de Mexico": { temp: "20°C", condition: "Nublado" },
+                "Guadalajara": { temp: "25°C", condition: "Parcialmente nublado" },
+                "Monterrey": { temp: "28°C", condition: "Soleado" },
+                "Cancun": { temp: "27°C", condition: "Lluvia ligera" }
+            };
+
+            const weather = estimatedWeather[city] || { temp: "N/A", condition: "Desconocido" };
+            document.getElementById("weather-result").innerHTML = `
+                <h2>${city}</h2>
+                <p>🌡️ Temperatura: ${weather.temp}</p>
+                <p>☁️ Condición: ${weather.condition}</p>
+            `;
+        }
+    </script>
+    <script src="clima.js"></script>
+</body>
+</html>
